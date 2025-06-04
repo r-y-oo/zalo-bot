@@ -1,0 +1,16 @@
+cffi
+websockets
+deep_translator
+fake_useragent
+gtts
+bs4
+pystyle
+clang
+pillow
+pyfiglet
+pytz
+munch
+pycryptodome
+aiohttp
+colorama
+psutil

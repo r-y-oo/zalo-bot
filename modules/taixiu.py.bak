@@ -1,0 +1,207 @@
+import os
+import requests
+import json
+from datetime import datetime, timedelta
+import random
+from zlapi import ZaloAPI
+from zlapi.models import *
+import time
+import importlib
+import os
+import json
+import threading
+import requests
+import re
+from datetime import datetime
+import urllib.request
+from zlapi.models import Message, ThreadType
+import random
+import threading
+from zlapi.models import Mention, Message
+from zlapi._message import MultiMention
+import sys
+
+
+config = {
+    "name": "taixiu",
+    "description": "Play taixiu game with bet and result"
+}
+
+cooldown_data = {}
+money_file = os.path.join(os.path.dirname(__file__), "money_data.json")
+if os.path.exists(money_file):
+    with open(money_file, "r") as file:
+        money_data = json.load(file)
+else:
+    money_data = {}
+
+def save_money_data():
+    with open(money_file, "w") as file:
+        json.dump(money_data, file)
+
+def add_money(user_id, amount):
+    if user_id in money_data:
+        money_data[user_id] += amount
+    else:
+        money_data[user_id] = amount
+    save_money_data()
+
+def subtract_money(user_id, amount):
+    if user_id in money_data:
+        money_data[user_id] -= amount
+        if money_data[user_id] < 0:
+            money_data[user_id] = 0
+    save_money_data()
+
+def get_money(user_id):
+    return money_data.get(user_id, 0)
+
+def check_cooldown(author_id, job_id):
+    if author_id in cooldown_data:
+        if job_id in cooldown_data[author_id]:
+            if datetime.now() < cooldown_data[author_id][job_id]:
+                return True
+    return False
+
+def update_cooldown(author_id, job_id):
+    if author_id not in cooldown_data:
+        cooldown_data[author_id] = {}
+    cooldown_data[author_id][job_id] = datetime.now() + timedelta(seconds=60)
+
+jobs = {
+    "1": {"name": "làm ngành", "reward_range": (500000, 700000)},
+    "2": {"name": "làm ôsin", "reward_range": (15000, 25000)},
+    "3": {"name": "làm điếm", "reward_range": (700000, 900000)},
+    "4": {"name": "bán máu", "reward_range": (300000, 500000)},
+    "5": {"name": "làm thợ sửa chữa", "reward_range": (100000, 200000)},
+    "6": {"name": "làm phục vụ quán ăn", "reward_range": (20000, 40000)},
+    "7": {"name": "dạy kèm", "reward_range": (40000, 60000)},
+    "8": {"name": "làm bảo vệ", "reward_range": (50000, 90000)},
+    "9": {"name": "làm tài xế", "reward_range": (100000, 150000)},
+    "10": {"name": "làm nhà báo", "reward_range": (200000, 300000)},
+}
+def get_random_reward(job_id):
+    if job_id in jobs:
+        min_reward, max_reward = jobs[job_id]['reward_range']
+        return random.randint(min_reward, max_reward)
+    return 0
+
+def run(client, args, mid, author_id, message, message_object, thread_id, thread_type):
+    if not args:
+        functions_list = (
+            "🎉 𝑪𝒂́𝒄 𝒄𝒉𝒖̛́𝒄 𝒏𝒂̆𝒏𝒈 𝒄𝒐́ 𝒔𝒂̆̃𝒏: 🎉\n\n"
+            "𝟏. 💰 𝒄𝒉𝒆𝒄𝒌𝒎𝒐𝒏𝒆𝒚 - 𝑲𝒊𝒆̂̉𝒎 𝒕𝒓𝒂 𝒔𝒐̂́ 𝒕𝒊𝒆̂̀𝒏 𝒉𝒊𝒆̣̂𝒏 𝒕𝒂̣𝒊 𝒄𝒖̉𝒂 𝒃𝒂̣𝒏\n\n"
+            "𝟐. 💵 𝒔𝒆𝒕𝒎𝒐𝒏𝒆𝒚 @𝒏𝒈𝒖̛𝒐̛̀𝒊_𝒅𝒖̀𝒏𝒈 <𝒔𝒐̂́ 𝒕𝒊𝒆̂̀𝒏> - 𝑫𝒂̣̆𝒕 𝒔𝒐̂́ 𝒕𝒊𝒆̂̀𝒏 𝒄𝒉𝒐 𝒏𝒈𝒖̛𝒐̛̀𝒊 𝒅𝒖̀𝒏\n"
+            "𝟑. 📋 𝒍𝒂𝒎𝒗𝒊𝒆𝒄 - 𝑯𝒊𝒆̂̉𝒏 𝒕𝒉𝒊̣ 𝒅𝒂𝒏𝒉 𝒔𝒂́𝒄𝒉 𝒄𝒐̂𝒏𝒈 𝒗𝒊𝒆̣̂𝒄\n"
+            "𝟒. 🛠️ 𝒍𝒂𝒎𝒗𝒊𝒆𝒄 <𝒔𝒐̂́> - 𝑪𝒉𝒐̣𝒏 𝒄𝒐̂𝒏𝒈 𝒗𝒊𝒆̣̂𝒄 𝒗𝒂̀ 𝒏𝒉𝒂̣̂𝒏 𝒕𝒊𝒆̂̀𝒏\n"
+            "𝟓. 🎲 𝒕𝒂̀𝒊/𝒙𝒊̉𝒖 <𝒔𝒐̂́ 𝒕𝒊𝒆̂̀𝒏 𝒄𝒖̛𝒐̛̣𝒄> - 𝑫𝒂̣̆𝒕 𝒄𝒖̛𝒐̛̣𝒄 𝒗𝒂̀𝒐 𝒕𝒂̀𝒊 𝒉𝒐𝒂̣̆𝒄 𝒙𝒊̉𝒖\n\n"
+            "🔍 𝑯𝒂̃𝒚 𝒄𝒉𝒐̣𝒏 𝒄𝒉𝒖̛́𝒄 𝒏𝒂̆𝒏𝒈 𝒅𝒆̂̉ 𝒃𝒂̆́𝒕 𝒅𝒂̂̀𝒖! 🚀"
+        )
+        return client.replyMessage(Message(text=functions_list), message_object, thread_id, thread_type)
+
+    command = args[0].lower()
+
+    if command == "checkmoney":
+        user_money = get_money(author_id)
+        reply_message = f"💳 • Money Current: {user_money} VND."
+        style_checkmoney = MultiMsgStyle([
+            MessageStyle(offset=0, length=10, style="font", size="12", auto_format=False),
+            MessageStyle(offset=10, length=len(reply_message.encode()) - 10, style="font", size="13", auto_format=False),
+            MessageStyle(offset=10, length=len(reply_message.encode()) - 10, style="color", color="#cdd6f4", auto_format=False),
+            MessageStyle(offset=11, length=len(reply_message.split(": ")[1].strip()), style="color", color="#a6adc8", auto_format=False)
+        ])
+        return client.replyMessage(Message(text=reply_message, style=style_checkmoney), message_object, thread_id, thread_type)
+
+    if command == "setmoney":
+        if author_id != "8697905534842942934":
+            return client.replyMessage(Message(text="Bạn không có quyền sử dụng lệnh này."), message_object, thread_id, thread_type)
+
+        if len(args) < 2 or not message_object.mentions:
+            return client.replyMessage(Message(text="Cú pháp không đúng. Vui lòng sử dụng: !setmoney @người_dùng <số tiền>"), message_object, thread_id, thread_type)
+
+        mentioned_user = message_object.mentions[0]
+        user_id = mentioned_user['uid']
+        try:
+            amount_str = args[-1].replace(",", "").replace(".", "")
+            amount = int(amount_str)
+            add_money(user_id, amount)
+            reply_message = f"• Added amount {amount} VND for user id: {user_id}."
+            style_setmoney = MultiMsgStyle([
+                MessageStyle(offset=0, length=10, style="font", size="12", auto_format=False),
+                MessageStyle(offset=10, length=len(reply_message.encode()) - 10, style="font", size="13", auto_format=False)
+            ])
+            return client.replyMessage(Message(text=reply_message, style=style_setmoney), message_object, thread_id, thread_type)
+        except ValueError:
+            return client.replyMessage(Message(text="Số tiền không hợp lệ. Vui lòng nhập một số."), message_object, thread_id, thread_type)
+
+    if command == "lamviec":
+        if len(args) != 2 or args[1] not in jobs:
+            job_options = "\n".join([f"{k}: {v['name']}" for k, v in jobs.items()])
+            return client.replyMessage(Message(text=f"Vui lòng chọn một công việc:\n{job_options}"), message_object, thread_id, thread_type)
+
+        job_id = args[1]
+        if check_cooldown(author_id, job_id):
+            return client.replyMessage(Message(text="Bạn phải chờ 60 giây để làm công việc này lại."), message_object, thread_id, thread_type)
+
+        update_cooldown(author_id, job_id)
+        job_name = jobs[job_id]['name']
+        job_reward = get_random_reward(job_id)
+        add_money(author_id, job_reward)
+        reply_message = f"• bạn đã {job_name} và nhận được {job_reward} VND."
+        style_lamviec = MultiMsgStyle([
+            MessageStyle(offset=0, length=10, style="font", size="12", auto_format=False),
+            MessageStyle(offset=10, length=len(reply_message.encode()) - 10, style="font", size="13", auto_format=False)
+        ])
+        return client.replyMessage(Message(text=reply_message, style=style_lamviec), message_object, thread_id, thread_type)
+
+    if len(args) < 2:
+        return client.replyMessage(Message(text="Insufficient arguments for betting."), message_object, thread_id, thread_type)
+
+    bet_type = command  
+    try:
+        bet_amount = int(args[1])
+    except ValueError:
+        return client.replyMessage(Message(text="Số tiền cược không hợp lệ. Vui lòng nhập một số."), message_object, thread_id, thread_type)
+
+    current_money = get_money(author_id)
+    if current_money < 1000:
+        return client.replyMessage(Message(text="Bạn cần ít nhất 1000 VND để chơi tài xỉu."), message_object, thread_id, thread_type)
+
+    if bet_amount < 1000:
+        return client.replyMessage(Message(text="Số tiền cược tối thiểu là 1000 VND."), message_object, thread_id, thread_type)
+
+    if bet_amount > current_money:
+        return client.replyMessage(Message(text="Bạn không có đủ tiền để đặt cược."), message_object, thread_id, thread_type)
+
+    try:
+        response = requests.get("https://api.sumiproject.net/game/taixiu")
+        if response.status_code == 200:
+            data = response.json()
+            total = data.get("total", None)
+            result = data.get("result", "Không có dữ liệu") 
+
+
+            if total is None:
+                return client.replyMessage(Message(text="No total value found in the API response."), message_object, thread_id, thread_type)
+
+            image_directory = os.path.join(os.path.dirname(__file__), "taixiu")
+            image_filename = f"{total}.jpg"
+            image_path = os.path.join(image_directory, image_filename)
+
+            if not os.path.exists(image_path):
+                return client.replyMessage(Message(text=f"No image found for total {total}."), message_object, thread_id, thread_type)
+
+            if bet_type == result:
+                add_money(author_id, bet_amount)  
+                content = f"Tổng điểm: {total}, Kết quả: {result}. Bạn đã thắng cược {bet_amount}!"
+            else:
+                subtract_money(author_id, bet_amount) 
+                content = f"Tổng điểm: {total}, Kết quả: {result}. Bạn đã thua cược {bet_amount}."
+
+            client.sendLocalImage(imagePath=image_path, thread_id=thread_id, thread_type=thread_type, message=Message(text=content))
+
+        else:
+            client.replyMessage(Message(text="Không thể lấy nội dung từ API."), message_object, thread_id, thread_type)
+
+    except Exception as e:
+        client.replyMessage(Message(text=f"Unexpected error: {e}"), message_object, thread_id, thread_type)

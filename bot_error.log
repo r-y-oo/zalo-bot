@@ -1,0 +1,32 @@
+2025-05-10 00:02:56,331 - ERROR - Request Exception: 503 Server Error: Service Unavailable for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyC5VvVGBk3T0TzfF_JCaDTDPAW97oRhdrc, Status Code: 503, Response: {
+  "error": {
+    "code": 503,
+    "message": "The service is currently unavailable.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+2025-05-10 00:25:04,516 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 00:25:19,005 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 01:37:10,004 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 04:28:19,810 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 09:02:07,406 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 10:06:17,875 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 11:27:29,316 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 11:55:14,034 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 12:36:54,376 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 12:53:05,381 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:08:54,349 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:41:41,643 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:53:03,211 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:56:14,058 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:56:37,335 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:56:48,270 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:56:58,748 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 14:57:59,040 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 15:14:27,199 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 15:21:48,643 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 15:21:53,875 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 16:08:41,899 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 17:49:22,945 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'
+2025-05-10 18:20:49,749 - ERROR - L\u1ed7i khi xóa file welcome_or_farewell.jpg: [WinError 32] The process cannot access the file because it is being used by another process: 'welcome_or_farewell.jpg'

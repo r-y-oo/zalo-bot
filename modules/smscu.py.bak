@@ -1,0 +1,62 @@
+from zlapi.models import *
+import datetime
+import os
+import subprocess
+
+last_sms_times = {}
+admin_ids = ['775196349208637101', '775196349208637101']  # Thay thế bằng ID admin thực tế
+
+des = {
+    'version': "1.0.1",
+    'credits': "𝕄𝕣ℚ",
+    'description': "🚀 𝕊𝕡𝕒𝕞 𝕊𝕄𝕊 𝕧𝕒̀ 𝕘𝕠̣𝕚 𝕕𝕚𝕖̣̂𝕟 𝕞𝕠̣̂𝕥 𝕔𝕒́𝕔𝕙 𝕒𝕟 𝕥𝕠𝕒̀𝕟."
+}
+
+def handle_sms_command(message, message_object, thread_id, thread_type, author_id, client):
+    parts = message.split()
+    
+    if len(parts) < 3:
+        client.replyMessage(Message(text='🚫 **𝐕𝐮𝐢 𝐥𝐨̀𝐧𝐠 𝐧𝐡𝐚̣̂𝐩 𝐬𝐨̂́ đ𝐢𝐞̣̂𝐧 𝐭𝐡𝐨𝐚̣𝐢 𝐯𝐚̀ 𝐬𝐨̂́ 𝐥𝐚̂̀𝐧 𝐠𝐮̛̉𝐢.*'), message_object, thread_id=thread_id, thread_type=thread_type, ttl=60000)
+        return
+
+    attack_phone_number, number_of_times = parts[1], int(parts[2])
+    
+    if not (attack_phone_number.isnumeric() and len(attack_phone_number) == 10 and attack_phone_number not in ['113', '911', '114', '115','0347460743']):
+        client.replyMessage(Message(text='❌ **𝐒𝐨̂́ đ𝐢𝐞̣̂𝐧 𝐭𝐡𝐨𝐚̣𝐢 𝐤𝐡𝐨̂𝐧𝐠 𝐡𝐨̛̣𝐩 𝐥𝐞̣̂🤬!.**'), message_object, thread_id=thread_id, thread_type=thread_type, ttl=60000)
+        return
+
+    current_time = datetime.datetime.now()
+    is_admin = author_id in admin_ids
+
+    # Hạn chế key FREE
+    if not is_admin and (number_of_times < 1 or number_of_times > 1000):
+        client.replyMessage(Message(text='🚫 **Dexry chỉ  cho phép spam từ 1 đến 1000  với key FREE!**'), message_object, thread_id=thread_id, thread_type=thread_type, ttl=60000)
+        return
+
+    if not is_admin and author_id in last_sms_times and (current_time - last_sms_times[author_id]).total_seconds() < 120:
+        client.replyMessage(Message(text="⏳ **Vui lòng chờ 120 giây và thử lại!**"), message_object, thread_id=thread_id, thread_type=thread_type, ttl=60000)
+        return
+
+    last_sms_times[author_id] = current_time
+    process = subprocess.Popen(["python", os.path.join(os.getcwd(), "smsv2.py"), attack_phone_number, str(number_of_times)])
+
+    for i in range(1, number_of_times + 1):
+        time_str = current_time.strftime("%d/%m/%Y %H:%M:%S")
+        masked_number = f"{attack_phone_number[:3]}***{attack_phone_number[-3:]}"
+        
+        msg_content = f"""
+bot spam sms và call
+📞 ᴘʜᴏɴᴇ: {masked_phone_number} 
+⏰ ᴛɪᴍᴇ: {time_str} 
+🔁 ʟɪɴᴇ: {i}/{number_of_times}
+👾 ᴄᴏᴏʟᴅᴏᴡɴ: 120
+👤 𝐀𝐝𝐦𝐢𝐧: 𝐃𝐳𝐢 - 𝐓𝐨𝐨𝐥
+"""
+        mention = Mention(author_id, length=len("Người quản lý"), offset=0)
+        style = MultiMsgStyle([MessageStyle(style="color", color="#4caf50", length=len(msg_content), offset=0)])
+
+        client.replyMessage(Message(text=msg_content.strip(), style=style, mention=mention), message_object, thread_id=thread_id, thread_type=thread_type, ttl=60000)
+        process.wait()
+
+def get_mitaizl():
+    return {'spamsms': handle_sms_command}
