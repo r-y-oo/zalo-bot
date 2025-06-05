@@ -138,5 +138,5 @@ def ping(message, message_object, thread_id, thread_type, author_id, client):
 
 def get_mitaizl():
     return {
-        'menu': ping
+        'menu2': ping
     }
