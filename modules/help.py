@@ -40,12 +40,12 @@ def show_help_guide(message, message_object, thread_id, thread_type, author_id, 
    • {PREFIX}help - Xem hướng dẫn này
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-👨‍💻 Bot by Hà Huy Hoàng | v2.1.0
+👨‍💻 Bot by Duy Khanh | v2.1.0
 🎯 Prefix hiện tại: {PREFIX}
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -71,7 +71,7 @@ def show_prefix_info(message, message_object, thread_id, thread_type, author_id,
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -94,7 +94,7 @@ def show_commands_list(message, message_object, thread_id, thread_type, author_i
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -128,7 +128,7 @@ def show_noprefix_commands(message, message_object, thread_id, thread_type, auth
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 

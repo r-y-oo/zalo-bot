@@ -85,11 +85,11 @@ class CommandHandler:
                     if hasattr(module, 'get_mitaizl'):
                         noprefix_commands = module.get_mitaizl()
                         auto_mitaizl.update(noprefix_commands)
-                        print(f"{BOLD}{GREEN}✓ Đã load module noprefix: {module_name} với {len(noprefix_commands)} lệnh{RESET}")
+                        print(f"{BOLD}{GREEN}Da load module noprefix: {module_name} voi {len(noprefix_commands)} lenh{RESET}")
                 except Exception as e:
-                    print(f"{BOLD}{RED}Không thể load module noprefix: {module_name}. Lỗi: {e}{RESET}")
+                    print(f"{BOLD}{RED}Khong the load module noprefix: {module_name}. Loi: {e}{RESET}")
         
-        print(f"{BOLD}{GREEN}Tổng cộng đã load {len(auto_mitaizl)} lệnh noprefix{RESET}")
+        print(f"{BOLD}{GREEN}Tong cong da load {len(auto_mitaizl)} lenh noprefix{RESET}")
         return auto_mitaizl
 
     def notify_admin_activity(self, message, author_id, thread_id, thread_type, command_type="command"):

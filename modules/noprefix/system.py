@@ -198,7 +198,7 @@ def evaluate_ping(ping_time):
 
 def check_system(message, message_object, thread_id, thread_type, author_id, client):
     wait_message = "Vui lòng chờ 1 chút trong khi bot kiểm tra thông tin hệ thống..."
-    client.replyMessage(Message(text=wait_message, ttl=30000), message_object, thread_id, thread_type)
+    client.replyMessage(Message(text=wait_message), message_object, thread_id, thread_type)
     
     sys_info = system_info()
     font_style = MessageStyle(
@@ -208,7 +208,7 @@ def check_system(message, message_object, thread_id, thread_type, author_id, cli
         length=len(sys_info),
         auto_format=False
     )
-    gui = Message(text=sys_info, style=font_style, ttl=30000)
+    gui = Message(text=sys_info, style=font_style)
     client.replyMessage(gui, message_object, thread_id, thread_type)
 
 def get_mitaizl():

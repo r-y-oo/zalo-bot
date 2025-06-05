@@ -50,7 +50,7 @@ def welcome(self, event_data, event_type):
             for member in event_data.updateMembers:
                 member_id = member['id']
                 member_name = member['dName']
-                text = f'👋🏻 Tạm biệt\n'
+                text = f'bai 👋🏻 Tạm biệt\n'
                 text += 'Bot By Duy Khanh \n'
                 text += f'• @{member_name}Out Group{group_name} '
 

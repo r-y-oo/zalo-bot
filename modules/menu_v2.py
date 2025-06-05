@@ -166,7 +166,7 @@ def show_admin_menu(message, message_object, thread_id, thread_type, author_id, 
     # Chỉ admin mới xem được
     if str(author_id) != str(ADMIN):
         client.replyMessage(
-            Message(text="🚫 Chỉ admin mới có thể xem menu này!", ttl=30000),
+            Message(text="🚫 Chỉ admin mới có thể xem menu này!"),
             message_object, thread_id, thread_type
         )
         return
@@ -199,7 +199,7 @@ def show_admin_menu(message, message_object, thread_id, thread_type, author_id, 
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -228,7 +228,7 @@ def show_group_menu(message, message_object, thread_id, thread_type, author_id, 
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -256,7 +256,7 @@ def show_fun_menu(message, message_object, thread_id, thread_type, author_id, cl
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -279,7 +279,7 @@ def show_music_menu(message, message_object, thread_id, thread_type, author_id, 
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -303,7 +303,7 @@ def show_media_menu(message, message_object, thread_id, thread_type, author_id, 
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -328,7 +328,7 @@ def show_nsfw_menu(message, message_object, thread_id, thread_type, author_id, c
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -350,7 +350,7 @@ def show_tools_menu(message, message_object, thread_id, thread_type, author_id, 
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -368,7 +368,7 @@ def show_social_menu(message, message_object, thread_id, thread_type, author_id,
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 
@@ -390,7 +390,7 @@ def show_ai_menu(message, message_object, thread_id, thread_type, author_id, cli
 """
     
     client.replyMessage(
-        Message(text=text, ttl=30000),
+        Message(text=text),
         message_object, thread_id, thread_type
     )
 

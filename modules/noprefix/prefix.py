@@ -1,6 +1,5 @@
 from config import PREFIX
 from zlapi.models import Message
-import json
 
 des = {
     'version': "1.0.5",
@@ -9,8 +8,7 @@ des = {
 }
 
 def prf():
-    with open('seting.json', 'r') as f:
-        return json.load(f).get('prefix')
+    return PREFIX
 
 def checkprefix(message, message_object, thread_id, thread_type, author_id, client):
     gui = Message(text=f"Prefix của bot là: {prf()}")

@@ -16,7 +16,7 @@ goibot_responses = [
 
 def goibot(message, message_object, thread_id, thread_type, author_id, client):
     response = random.choice(goibot_responses)
-    gui = Message(text=response, ttl=30000)
+    gui = Message(text=response)
     client.replyMessage(gui, message_object, thread_id, thread_type)
 
 def get_mitaizl():

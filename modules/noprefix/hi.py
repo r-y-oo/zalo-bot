@@ -45,8 +45,7 @@ def chao(message, message_object, thread_id, thread_type, author_id, client):
 
     client.replyMessage(
         Message(
-            text=response_text,
-            ttl=30000
+            text=response_text
         ),
         message_object,
         thread_id,
@@ -63,7 +62,6 @@ def chao(message, message_object, thread_id, thread_type, author_id, client):
 
 def get_mitaizl():
     return dict.fromkeys(
-        ['hello', 'hi', 'hai', 'chào', 'xin chào', 'chao', 'hí', 'lô', 
-         'hú', 'hú hú', 'hê nhô', 'alo', 'a lô', 'a nhô'],
+        ['hello', 'hi', 'hai', 'chao' ,'chào', 'xin chao' ,'xin chào' , 'ad' , 'ad ơi', 'alo', 'a lo', 'hi hi', 'he no'],
         chao
     )
