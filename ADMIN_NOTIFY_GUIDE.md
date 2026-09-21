@@ -52,7 +52,7 @@ Hệ thống thông báo admin giúp admin theo dõi hoạt động của bot m�
 🚀 BOT KHỞI ĐỘNG THÀNH CÔNG 🚀
 
 🕐 Thời gian: 05/06/2025 02:10:00
-🤖 Bot Name: Bot by Ha Huy Hoang
+🤖 Bot Name: Bot by Duy Khanh
 📱 Version: 1.1
 🆔 Bot ID: 1234567890123456789
 

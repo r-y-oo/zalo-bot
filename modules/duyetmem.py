@@ -4,7 +4,7 @@ import time
 
 des = {
     'version': "1.0.1",
-    'credits': "ha huy hoang",
+    'credits': "Duy Khanh",
     'description': "Duyệt tất cả thành viên"
 }
 

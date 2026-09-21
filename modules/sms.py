@@ -4,7 +4,7 @@ from zlapi.models import Message
 import time
 des = {
     'version': "1.9.2",
-    'credits': "HA HUY HOANG",
+    'credits': "Duy Khanh",
     'description': "spam sms"
 }
 def handle_sms_command(message, message_object, thread_id, thread_type, author_id, client):
@@ -49,7 +49,7 @@ def handle_sms_command(message, message_object, thread_id, thread_type, author_i
    ├─> 120
    ├─────────────⭔
  Admin BOT:
-   ├─> HA HUY HOANG
+   ├─> Duy Khanh
    └─────────────⭔
 
     '''

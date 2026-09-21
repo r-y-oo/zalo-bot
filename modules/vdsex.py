@@ -3,7 +3,7 @@ import requests
 
 des = {
     'version': "1.0.2",
-    'credits': "HA HUY HOANG",
+    'credits': "Duy Khanh",
     'description': "Gửi video sẽ"
 }
 

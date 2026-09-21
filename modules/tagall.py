@@ -5,7 +5,7 @@ import random
 
 des = {
     'version': "1.0.1",
-    'credits': "HA HUY HOANG",
+    'credits': "Duy Khanh",
     'description': "Lệnh tagall nhóm",
     'power': "Quản trị viên Bot"
 }

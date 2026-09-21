@@ -1,4 +1,4 @@
-# 🤖 Bot Zalo by Ha Huy Hoang
+# 🤖 Bot Zalo by Duy Khanh
 
 Bot Zalo tự động với nhiều tính năng hữu ích, hệ thống thông báo admin toàn diện và menu phân loại có tổ chức.
 
@@ -160,7 +160,7 @@ python install.py
 ## 📁 Cấu Trúc Files
 
 ```
-bothoang/
+zalo_bot/
 ├── bot.py              # File chính
 ├── config.py           # Cấu hình
 ├── install.py          # Script cài đặt
@@ -245,9 +245,10 @@ python test_startup.py
 
 ## 📝 Credits
 
-- **Developer**: Ha Huy Hoang
+- **Developer**: Duy Khanh
 - **Version**: 2.1.0
 - **Last Update**: 05/06/2025
 - **Features**: Menu System v2, Auto Setup, Admin Notification, Help System
+- **Noted**: Mọi chức năng và hệ thống chỉ mang tính học hỏi không lợi dụng vào chuyện phi pháp tôi không chịu trách nhiệm nếu bạn làm chuyện phi pháp khi reup code
 
 **🎯 Mục tiêu: Setup trong 3 lệnh, sử dụng trực quan với menu phân loại!**

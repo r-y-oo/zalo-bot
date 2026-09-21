@@ -85,7 +85,7 @@ def send_startup_notification(client):
 🚀 BOT KHỞI ĐỘNG THÀNH CÔNG 🚀
 
 🕐 Thời gian: {startup_time}
-🤖 Bot Name: {getattr(client, 'me_name', 'Bot by Ha Huy Hoang')}
+🤖 Bot Name: {getattr(client, 'me_name', 'Bot by Duy Khanh')}
 📱 Version: {getattr(client, 'version', '1.1')}
 🆔 Bot ID: {client.uid}
 
